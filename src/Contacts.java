@@ -8,9 +8,9 @@ public class Contacts implements Serializable {
 
 
     public Contacts(String firstName, String lastName, String num) {
-        this.fname = firstName;
-        this.lname = lastName;
-        this.phone = num;
+        this.fname = firstName + ";";
+        this.lname = lastName + ";";
+        this.phone = num + ";";
 
     }
 
