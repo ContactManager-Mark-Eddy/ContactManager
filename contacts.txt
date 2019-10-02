@@ -1,2 +1,3 @@
-{first, last, 210}
-{eddy, mark, 21012}
+eddy;bautista;21012
+mark;strange;83038
+bryan;smith;21012
