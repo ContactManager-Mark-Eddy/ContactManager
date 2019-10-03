@@ -60,29 +60,31 @@ public class ContactsApp {
         String parsedFirst;
         String parsedLast;
         String parsedNum;
+
+
         for (Contacts contact: fullList) {
+
             parsedFirst = contact.getFname();
+
+            StringBuilder first = new StringBuilder(parsedFirst);
+            first = first.deleteCharAt(first.length()-1);
+            parsedFirst = first.toString();
+
             parsedLast = contact.getLname();
+        StringBuilder last = new StringBuilder(parsedLast);
+            last = last.deleteCharAt(last.length()-1);
+            parsedLast = last.toString();
+
             parsedNum = contact.getPhone();
+        StringBuilder num = new StringBuilder(parsedNum);
+            num = num.deleteCharAt(num.length()-1);
+            parsedNum = num.toString();
 
         System.out.println(parsedFirst + " " + parsedLast + " | " + parsedNum + "\n");
 
         }
     }
 
-
-//    public static List<String> readFileIntoList(String file) {
-//        List<String> lines = Collections.emptyList();
-//        try {
-//            lines = Files.readAllLines(Paths.get(file), StandardCharsets.UTF_8);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-////        System.out.println(lines);
-//        return lines;
-//
-//    }
 
 
     public static void addPerson() {
