@@ -134,28 +134,46 @@ public class ContactsApp {
     public static void contactSearch(){
         Input input = new Input();
 
-        int choice = input.getInt("\"1. search first name.\\n\" +\n" +
-                "                \"2. search last name.\\n\" +\n" +
-                "                \"3. search by number.\\n\"");
+        int choice = input.getInt("1. search first name.\n" +
+                "2. search last name.\n" +
+                "3. search by number.\n");
 
         switch(choice){
             case 1:
 
-                String search = input.getString("enter name to search");
+                String search = input.getString("enter first name to search");
 
                 for (Contacts contacts: fullList) {
                     if(search.equalsIgnoreCase(contacts.getFname())){
-                        System.out.println(contacts.getFname());
-                    }else {
-                        System.out.println("nope");
+                        System.out.println(contacts.getFname() + " " + contacts.getLname() + " | " + contacts.getPhone() + "\n");
                     }
 
                 }
 
                 break;
             case 2:
+
+
+                String search2 = input.getString("enter last name to search");
+
+                for (Contacts contacts: fullList) {
+                    if(search2.equalsIgnoreCase(contacts.getLname())){
+                        System.out.println(contacts.getFname() + " " + contacts.getLname() + " | " + contacts.getPhone() + "\n");
+                    }
+
+                }
                 break;
             case 3:
+
+
+                String search3 = input.getString("enter phone number to search");
+
+                for (Contacts contacts: fullList) {
+                    if(search3.equalsIgnoreCase(contacts.getPhone())){
+                        System.out.println(contacts.getFname() + " " + contacts.getLname() + " | " + contacts.getPhone() + "\n");
+                    }
+
+                }
                 break;
             default:
                 System.out.println("please select either 1, 2, or 3");
