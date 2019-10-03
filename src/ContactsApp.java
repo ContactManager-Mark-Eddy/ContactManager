@@ -14,7 +14,7 @@ import java.util.List;
 
 public class ContactsApp {
 
-    private static ArrayList<Contacts> fullList = new ArrayList<>();
+    public static ArrayList<Contacts> fullList = new ArrayList<>();
 
     public static void main(String[] args) {
         readTxt();
@@ -49,6 +49,9 @@ public class ContactsApp {
         } else if(choice == 3){
             contactSearch();
             displayMenu();
+        } else if (choice == 4){
+            deleteContact();
+            displayMenu();
         } else if (choice == 5){
             writeToFile();
         }
@@ -65,26 +68,13 @@ public class ContactsApp {
         String parsedLast;
         String parsedNum;
 
-
         for (Contacts contact: fullList) {
 
             parsedFirst = contact.getFname();
 
-//            StringBuilder first = new StringBuilder(parsedFirst);
-//            first = first.deleteCharAt(first.length()-1);
-//            parsedFirst = first.toString();
-
             parsedLast = contact.getLname();
 
-//        StringBuilder last = new StringBuilder(parsedLast);
-//            last = last.deleteCharAt(last.length()-1);
-//            parsedLast = last.toString();
-
             parsedNum = contact.getPhone();
-
-//        StringBuilder num = new StringBuilder(parsedNum);
-//            num = num.deleteCharAt(num.length()-1);
-//            parsedNum = num.toString();
 
         System.out.println(parsedFirst + " " + parsedLast + " | " + parsedNum + "\n");
 
@@ -101,7 +91,7 @@ public class ContactsApp {
 
         Contacts newContact = new Contacts(f, l, n);
         fullList.add(newContact);
-        System.out.println(fullList);
+//        System.out.println(fullList);
 
 
     }
@@ -125,7 +115,7 @@ public class ContactsApp {
             fullList.add(addContact);
 
         }
-        System.out.println(fullList);
+//        System.out.println(fullList);
 
     }
 
@@ -137,42 +127,29 @@ public class ContactsApp {
         int choice = input.getInt("1. search first name.\n" +
                 "2. search last name.\n" +
                 "3. search by number.\n");
-
         switch(choice){
             case 1:
-
                 String search = input.getString("enter first name to search");
-
                 for (Contacts contacts: fullList) {
                     if(search.equalsIgnoreCase(contacts.getFname())){
                         System.out.println(contacts.getFname() + " " + contacts.getLname() + " | " + contacts.getPhone() + "\n");
                     }
-
                 }
-
                 break;
             case 2:
-
-
                 String search2 = input.getString("enter last name to search");
-
                 for (Contacts contacts: fullList) {
                     if(search2.equalsIgnoreCase(contacts.getLname())){
                         System.out.println(contacts.getFname() + " " + contacts.getLname() + " | " + contacts.getPhone() + "\n");
                     }
-
                 }
                 break;
             case 3:
-
-
                 String search3 = input.getString("enter phone number to search");
-
                 for (Contacts contacts: fullList) {
                     if(search3.equalsIgnoreCase(contacts.getPhone())){
                         System.out.println(contacts.getFname() + " " + contacts.getLname() + " | " + contacts.getPhone() + "\n");
                     }
-
                 }
                 break;
             default:
@@ -182,7 +159,41 @@ public class ContactsApp {
     }
 
 
+
+    public static void  deleteContact() {
+        Input input = new Input();
+
+
+        int count = 1;
+
+        System.out.println("Name | Phone number\n" +
+                "---------------\n");
+
+        String parsedFirst;
+        String parsedLast;
+        String parsedNum;
+
+        for (Contacts contact : fullList) {
+
+            parsedFirst = contact.getFname();
+
+            parsedLast = contact.getLname();
+
+            parsedNum = contact.getPhone();
+
+            System.out.println(count + ". " + parsedFirst + " " + parsedLast + " | " + parsedNum + "\n");
+            count++;
+
+        }
+
+        int choice = input.getInt("enter number to delete");
+
+            fullList.remove(choice - 1);
+    }
+
     public static void  writeToFile(){
+
+        System.out.println(fullList);
 
         List<String> newlist = new ArrayList<>();
 
@@ -190,7 +201,7 @@ public class ContactsApp {
             newlist.add(contact.getFname() + ";" + contact.getLname() + ";" + contact.getPhone());
         }
 
-        Path addTxt = Paths.get("contact.txt");
+        Path addTxt = Paths.get("contacts.txt");
 
         try{
             Files.write(addTxt, newlist);
