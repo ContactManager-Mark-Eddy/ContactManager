@@ -76,6 +76,19 @@ public class ContactsApp {
 
             parsedNum = contact.getPhone();
 
+            if(parsedNum.length() < 7){
+                parsedNum = contact.getPhone();
+            }
+            else if(parsedNum.length() == 7){
+                parsedNum = parsedNum.replaceFirst("(\\d{3})(\\d+)", "$1-$2");
+            }
+            else if(parsedNum.length() == 10){
+                parsedNum = parsedNum.replaceFirst("(\\d{3})(\\d{3})(\\d+)", "($1) $2-$3");
+            } else {
+                parsedNum = contact.getPhone();
+            }
+
+
         System.out.println(parsedFirst + " " + parsedLast + " | " + parsedNum + "\n");
 
         }
