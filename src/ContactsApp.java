@@ -14,20 +14,17 @@ import java.util.List;
 
 public class ContactsApp {
 
-    public static ArrayList<Contacts> fullList = new ArrayList<>();
+    private static ArrayList<Contacts> fullList = new ArrayList<>();
 
     public static void main(String[] args) {
-        readTxt();
-        displayMenu();
-//
-//        Contacts contact = new Contacts("Micheal", "Debrah", "21002038503");
-//        Path addContact = Paths.get("contacts.txt");
 
-//        String test1 = addContact.toString();
-//
-//        System.out.println(readFileIntoList(test1));
+        readTxt();
+
+        displayMenu();
 
     }
+
+/////////////////////// displays main menu ///////////////////////
 
     public static void displayMenu() {
         Input input = new Input();
@@ -58,6 +55,9 @@ public class ContactsApp {
 
     }
 
+/////////////////////// displays the current array list ///////////////////////
+
+
     public static void displayAll(){
 
 
@@ -76,12 +76,26 @@ public class ContactsApp {
 
             parsedNum = contact.getPhone();
 
+            if(parsedNum.length() < 7){
+                parsedNum = contact.getPhone();
+            }
+            else if(parsedNum.length() == 7){
+                parsedNum = parsedNum.replaceFirst("(\\d{3})(\\d+)", "$1-$2");
+            }
+            else if(parsedNum.length() == 10){
+                parsedNum = parsedNum.replaceFirst("(\\d{3})(\\d{3})(\\d+)", "($1) $2-$3");
+            } else {
+                parsedNum = contact.getPhone();
+            }
+
+
         System.out.println(parsedFirst + " " + parsedLast + " | " + parsedNum + "\n");
 
         }
     }
 
 
+/////////////////////// adds to the current array list ///////////////////////
 
     public static void addPerson() {
         Input input = new Input();
@@ -95,6 +109,8 @@ public class ContactsApp {
 
 
     }
+
+/////////////////////// initial txt file load and turns into array list of contacts objects ///////////////////////
 
     public static void readTxt() {
 
@@ -120,6 +136,7 @@ public class ContactsApp {
     }
 
 
+/////////////////////// searches the current array list ///////////////////////
 
     public static void contactSearch(){
         Input input = new Input();
@@ -130,8 +147,9 @@ public class ContactsApp {
         switch(choice){
             case 1:
                 String search = input.getString("enter first name to search");
+
                 for (Contacts contacts: fullList) {
-                    if(search.equalsIgnoreCase(contacts.getFname())){
+                    if(contacts.getFname().toLowerCase().contains(search.toLowerCase())){
                         System.out.println(contacts.getFname() + " " + contacts.getLname() + " | " + contacts.getPhone() + "\n");
                     }
                 }
@@ -139,7 +157,7 @@ public class ContactsApp {
             case 2:
                 String search2 = input.getString("enter last name to search");
                 for (Contacts contacts: fullList) {
-                    if(search2.equalsIgnoreCase(contacts.getLname())){
+                    if(contacts.getLname().toLowerCase().contains(search2.toLowerCase())){
                         System.out.println(contacts.getFname() + " " + contacts.getLname() + " | " + contacts.getPhone() + "\n");
                     }
                 }
@@ -147,7 +165,7 @@ public class ContactsApp {
             case 3:
                 String search3 = input.getString("enter phone number to search");
                 for (Contacts contacts: fullList) {
-                    if(search3.equalsIgnoreCase(contacts.getPhone())){
+                    if(contacts.getPhone().toLowerCase().contains(search3.toLowerCase())){
                         System.out.println(contacts.getFname() + " " + contacts.getLname() + " | " + contacts.getPhone() + "\n");
                     }
                 }
@@ -159,6 +177,7 @@ public class ContactsApp {
     }
 
 
+/////////////////////// deletes contact from the array list ///////////////////////
 
     public static void  deleteContact() {
         Input input = new Input();
@@ -190,6 +209,9 @@ public class ContactsApp {
 
             fullList.remove(choice - 1);
     }
+
+
+/////////////////////// transforms array list to formatted string and sends to file ///////////////////////
 
     public static void  writeToFile(){
 
