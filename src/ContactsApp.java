@@ -18,7 +18,8 @@ public class ContactsApp {
 
     public static void main(String[] args) {
         readTxt();
-//        displayMethod();
+//        addPerson();
+        displayMethod();
 //
 //        Contacts contact = new Contacts("Micheal", "Debrah", "21002038503");
 //        Path addContact = Paths.get("contacts.txt");
@@ -42,41 +43,31 @@ public class ContactsApp {
 
         if (choice == 1) {
 //            System.out.println(displayAll());
-//            displayAll();
+            displayAll();
         } else if (choice == 2) {
             addPerson();
         }
 
     }
 
-//    public static void displayAll(){
-//
-//        Path testFile = Paths.get("contacts.txt");
-//        List<String> lines = new ArrayList<>();
-//        try{
-//            lines = Files.readAllLines(testFile);
-//        } catch (Exception e){
-//            e.printStackTrace();
-//            System.out.println("Tha did not work");
-//        }
-////        System.out.println(lines.get(0));
-//
-//        System.out.println("Name | Phone number\n" +
-//                "---------------\n");
-//
-//        String[] parsedString;
-//        for (String contact: lines) {
-//            parsedString = contact.split(";");
-//
-//        System.out.println(parsedString[0] + " " + parsedString[1] + " | " + parsedString[2] + "\n");
-//
-//
-//        }
-//
-//
-//
-////        return lines;
-//    }
+    public static void displayAll(){
+
+
+        System.out.println("Name | Phone number\n" +
+                "---------------\n");
+
+        String parsedFirst;
+        String parsedLast;
+        String parsedNum;
+        for (Contacts contact: fullList) {
+            parsedFirst = contact.getFname();
+            parsedLast = contact.getLname();
+            parsedNum = contact.getPhone();
+
+        System.out.println(parsedFirst + " " + parsedLast + " | " + parsedNum + "\n");
+
+        }
+    }
 
 
 //    public static List<String> readFileIntoList(String file) {
@@ -100,6 +91,8 @@ public class ContactsApp {
         String n = input.getString("Enter Number");
 
         Contacts newContact = new Contacts(f, l, n);
+        fullList.add(newContact);
+        System.out.println(fullList);
 
 
     }
@@ -127,7 +120,6 @@ public class ContactsApp {
 
         }
         System.out.println(fullList);
-        System.out.println(fullList.get(0).getFname());
 
     }
 
