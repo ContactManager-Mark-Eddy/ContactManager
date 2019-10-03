@@ -49,6 +49,8 @@ public class ContactsApp {
         } else if(choice == 3){
             contactSearch();
             displayMenu();
+        } else if (choice == 5){
+            writeToFile();
         }
 
     }
@@ -163,6 +165,20 @@ public class ContactsApp {
 
 
     public static void  writeToFile(){
+
+        List<String> newlist = new ArrayList<>();
+
+        for(Contacts contact: fullList){
+            newlist.add(contact.getFname() + ";" + contact.getLname() + ";" + contact.getPhone());
+        }
+
+        Path addTxt = Paths.get("contact.txt");
+
+        try{
+            Files.write(addTxt, newlist);
+        } catch (IOException e){
+            e.printStackTrace();
+        }
 
 
     }
