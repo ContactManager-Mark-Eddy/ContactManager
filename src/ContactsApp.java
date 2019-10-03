@@ -18,8 +18,7 @@ public class ContactsApp {
 
     public static void main(String[] args) {
         readTxt();
-//        addPerson();
-        displayMethod();
+        displayMenu();
 //
 //        Contacts contact = new Contacts("Micheal", "Debrah", "21002038503");
 //        Path addContact = Paths.get("contacts.txt");
@@ -30,7 +29,7 @@ public class ContactsApp {
 
     }
 
-    public static void displayMethod() {
+    public static void displayMenu() {
         Input input = new Input();
 
         System.out.println("1. View contacts.\n" +
@@ -43,10 +42,13 @@ public class ContactsApp {
 
         if (choice == 1) {
             displayAll();
-            displayMethod();
+            displayMenu();
         } else if (choice == 2) {
             addPerson();
-            displayMethod();
+            displayMenu();
+        } else if(choice == 3){
+            contactSearch();
+            displayMenu();
         }
 
     }
@@ -66,19 +68,21 @@ public class ContactsApp {
 
             parsedFirst = contact.getFname();
 
-            StringBuilder first = new StringBuilder(parsedFirst);
-            first = first.deleteCharAt(first.length()-1);
-            parsedFirst = first.toString();
+//            StringBuilder first = new StringBuilder(parsedFirst);
+//            first = first.deleteCharAt(first.length()-1);
+//            parsedFirst = first.toString();
 
             parsedLast = contact.getLname();
-        StringBuilder last = new StringBuilder(parsedLast);
-            last = last.deleteCharAt(last.length()-1);
-            parsedLast = last.toString();
+
+//        StringBuilder last = new StringBuilder(parsedLast);
+//            last = last.deleteCharAt(last.length()-1);
+//            parsedLast = last.toString();
 
             parsedNum = contact.getPhone();
-        StringBuilder num = new StringBuilder(parsedNum);
-            num = num.deleteCharAt(num.length()-1);
-            parsedNum = num.toString();
+
+//        StringBuilder num = new StringBuilder(parsedNum);
+//            num = num.deleteCharAt(num.length()-1);
+//            parsedNum = num.toString();
 
         System.out.println(parsedFirst + " " + parsedLast + " | " + parsedNum + "\n");
 
@@ -108,21 +112,58 @@ public class ContactsApp {
             lines = Files.readAllLines(testFile);
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("Tha did not work");
+            System.out.println("did not work");
         }
-//        System.out.println(lines.get(0));
-
 
         String[] parsedString;
         for (String contact : lines) {
             parsedString = contact.split(";");
 
             Contacts addContact = new Contacts(parsedString[0],parsedString[1],parsedString[2]);
-//            System.out.println(parsedString[0] + " " + parsedString[1] + " | " + parsedString[2] + "\n");
             fullList.add(addContact);
 
         }
         System.out.println(fullList);
+
+    }
+
+
+
+    public static void contactSearch(){
+        Input input = new Input();
+
+        int choice = input.getInt("\"1. search first name.\\n\" +\n" +
+                "                \"2. search last name.\\n\" +\n" +
+                "                \"3. search by number.\\n\"");
+
+        switch(choice){
+            case 1:
+
+                String search = input.getString("enter name to search");
+
+                for (Contacts contacts: fullList) {
+                    if(search.equalsIgnoreCase(contacts.getFname())){
+                        System.out.println(contacts.getFname());
+                    }else {
+                        System.out.println("nope");
+                    }
+
+                }
+
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            default:
+                System.out.println("please select either 1, 2, or 3");
+                contactSearch();
+        }
+    }
+
+
+    public static void  writeToFile(){
+
 
     }
 
