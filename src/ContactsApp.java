@@ -42,10 +42,11 @@ public class ContactsApp {
         int choice = input.getInt("Enter an option (1, 2, 3, 4 or 5):");
 
         if (choice == 1) {
-//            System.out.println(displayAll());
             displayAll();
+            displayMethod();
         } else if (choice == 2) {
             addPerson();
+            displayMethod();
         }
 
     }
